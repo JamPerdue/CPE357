@@ -11,5 +11,5 @@ int is_a_square(struct Rectangle r){
 		return 1;
 	}
 	return 0;
-
+	}
 

@@ -20,10 +20,11 @@ void test_create_point2(void)
    checkit_double(p.y, 12.1);
 }
 void test_is1(void){
-	struct point p1 = create_point(1,1);
-	struct point p2 = create_point(0,0);
+	struct point p1 = create_point(0,1);
+	struct point p2 = create_point(1,0);
 	struct Rectangle r = {p1,p2};
 	checkit_int(is_a_square(r),1);
+}
 void test_create_point(void)
 {
    test_create_point1();

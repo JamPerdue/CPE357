@@ -1,7 +1,7 @@
 CC = gcc
-CFLAGS = -Wall -ansi -pedantic -Werror
+CFLAGS = -Wall -ansi -pedantic
 MAIN = part6
-OBJS = part6.o
+OBJS = part6.o part6_tests.o
 all : $(MAIN)
 
 $(MAIN) : $(OBJS) part6.h
