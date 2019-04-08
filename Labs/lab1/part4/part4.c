@@ -10,7 +10,8 @@ void str_lower(char *orig, char *buffer){
         while(i < s){
                 buffer[i] = tolower(orig[i]);
                 i++;
-        }/*
+        }
+	buffer[i] = 0;/*
         int i, s = strlen(orig);
         for (i = 0; i < s; i++){
             buffer[i] = tolower(orig[i]);
