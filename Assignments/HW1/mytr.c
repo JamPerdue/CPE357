@@ -16,20 +16,37 @@ void translate(char *orig, char *soln, char translate[]){
 
 	while(i<len1){
 		if(i<len2){
-			current = soln[i];	
-			translate[i] = soln[i];
+			if(soln[i]==92){
+				i++;
+				if(soln[i]==110){
+					current = 10;
+					translate[(int)orig[i-1]] = 10;
+				}
+				if(soln[i] == 92){
+					current = 92;
+					translate[(int)orig[i-1]] = 92;
+				}
+				if(soln[i] ==116){
+					current = 9;
+					translate[(int)orig[i-1]] = 9;
+				}
 			
+			}
+			else{
+				current = soln[i];
+				translate[(int)orig[i]] = soln[i];
+			}	
 		}
 		else{
 			current = last;
-			translate[i] = last;
+			translate[(int)orig[i]] = last;
 		}
 		
 		check = 0;
 		while(check<i){
 			if(orig[i] == orig[check]){
-				printf("duplicate\n");
-				translate[check] = current;
+				
+				translate[(int)orig[check]] = current;
 			}
 			check++;
 		}	
@@ -41,19 +58,25 @@ void translate(char *orig, char *soln, char translate[]){
 int main(int argc, char *argv[]){
 	char *key;
 	char *sol;
-	char translated[101];
-	char *final;
-
+	char translated[256];
+	int curr;
+	int lenkey;
+	
 	if(1<0){
 		return 1;
 	}
 
 	key = argv[1];
 	sol = argv[2];
-
 	translate(key,sol,translated);
-	final = translated;
-	printf("%s\n",final);	
-	
+	while(EOF!=(curr=getchar())){
+		if(translated[curr]!=0){
+		
+			printf("%c",translated[curr]);
+		}
+		else{
+			printf("%c",(char)curr);
+		}
+	}
 	return 0;
 	}
