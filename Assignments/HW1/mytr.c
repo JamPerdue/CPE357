@@ -54,29 +54,59 @@ void translate(char *orig, char *soln, char translate[]){
 	}
 
 }
+void translateDel(char *orig, char translate[]){
+	int i = 0;
+	int len1;
+	len1 = strlen(orig);
+
+	while(i<len1){
+				
+		translate[(int)orig[i]] = 0;
+		
+	
+		i++;
+	}
+
+}
 
 int main(int argc, char *argv[]){
 	char *key;
 	char *sol;
 	char translated[256];
 	int curr;
-	int lenkey;
-	
-	if(1<0){
+	int count = 0; 
+	if(argc < 3){
+		fprintf(stderr, "Too few arguments\nUsage:\nmytr [-d] set1 set2\n");
 		return 1;
 	}
+	
 
-	key = argv[1];
-	sol = argv[2];
-	translate(key,sol,translated);
-	while(EOF!=(curr=getchar())){
-		if(translated[curr]!=0){
-		
-			printf("%c",translated[curr]);
-		}
-		else{
-			printf("%c",(char)curr);
-		}
+	if(argc > 3){
+		fprintf(stderr, "Too many arguments\nUsage:\nmytr [-d] set1 set2\n");
+		return 1;
 	}
+	if(argv[1][0]== 45&& argv[1][1]!= 100){
+		fprintf(stderr, "Bad switch\nUsage:\nmytr [-d] set1 set2\n");
+		return 1;
+		}
+	while(count<256){
+		translated[count] = count;
+		count++;
+	}
+	if(strcmp(argv[1],"-d")==0){
+		key = argv[2];
+		translateDel(key,translated);	
+
+	}
+	else{
+		key = argv[1];
+		sol = argv[2];
+	
+		translate(key,sol,translated);
+	}
+		while(EOF!=(curr=getchar())){
+			putchar(translated[curr]);
+		}
+		
 	return 0;
 	}
