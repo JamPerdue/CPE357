@@ -7,6 +7,7 @@
 void translate(char *orig, char *soln, char translate[]){
 	char last = soln[strlen(soln)-1];
 	int i = 0;
+	int k = 0;
 	int check = 0;
 	char current;
 	int len1;
@@ -16,25 +17,25 @@ void translate(char *orig, char *soln, char translate[]){
 
 	while(i<len1){
 		if(i<len2){
-			if(soln[i]==92){
-				i++;
-				if(soln[i]==110){
+			if(soln[k]==92){
+				k++;
+				if(soln[k]==110){
 					current = 10;
-					translate[(int)orig[i-1]] = 10;
+					translate[(int)orig[i]] = 10;
 				}
-				if(soln[i] == 92){
+				if(soln[k] == 92){
 					current = 92;
-					translate[(int)orig[i-1]] = 92;
+					translate[(int)orig[i]] = 92;
 				}
-				if(soln[i] ==116){
+				if(soln[k] ==116){
 					current = 9;
-					translate[(int)orig[i-1]] = 9;
+					translate[(int)orig[i]] = 9;
 				}
 			
 			}
 			else{
-				current = soln[i];
-				translate[(int)orig[i]] = soln[i];
+				current = soln[k];
+				translate[(int)orig[i]] = soln[k];
 			}	
 		}
 		else{
@@ -49,7 +50,8 @@ void translate(char *orig, char *soln, char translate[]){
 				translate[(int)orig[check]] = current;
 			}
 			check++;
-		}	
+		}
+		k++;	
 		i++;
 	}
 
