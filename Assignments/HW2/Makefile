@@ -2,21 +2,20 @@
 # Symbolic name definitions
 
 CC = gcc
-CFLAGS = -Wall -ansi -pedantic 
-MAIN = mytr
-OBJS = mytr.o
+CFLAGS = -Wall -ansi -pedantic -lm -g 
+MAIN = fw
+OBJS = fw.o
 
 # Rules
 #
 
 all:$(MAIN)
 
-$(MAIN) :$(OBJS) mytr.h
+$(MAIN) :$(OBJS) fw.h
 	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS)
 
-mytr.o : mytr.c mytr.h
-	$(CC) $(CFLAGS) -c mytr.c
-
+fw.o : fw.c fw.h
+	$(CC) $(CFLAGS) -c fw.c
 
 clean :
 	rm *.o $(MAIN) core

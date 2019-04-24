@@ -12,42 +12,65 @@ void translate(char *orig, char *soln, char translate[]){
 	char current;
 	int len1;
 	int len2;
+	int over;
 	len1 = strlen(orig);
 	len2 = strlen(soln);
 
 	while(i<len1){
+		if(orig[i]==92){
+			i++;
+			if(orig[i]==110){
+			over = '\n';
+			}	
+			else if(orig[i] == 't'){
+			over = '\t';
+			}
+			else if(orig[i] =='\\'){
+			over = '\\';
+			}
+			else{
+			over = orig[i];
+			}
+		}
+		else{
+			over = orig[i];
+		}
 		if(i<len2){
-			if(soln[k]=='\\'){
+			/*printf("%c",soln[k]);*/
+			if(soln[k]==92){
 				k++;
 
 				if(soln[k]==110){
-					current = 10;
-					translate[(int)orig[i]] = 10;
+					current = 10;	
+					translate[over] = 10;
 				}
 				else if(soln[k] == 0){
 					current = 92;
-					translate[(int)orig[i]] = 92;
+					translate[over] = 92;
 					
 				}
-				else if(soln[k] ==116){
+				else if(soln[k] =='t'){
+					/*printf("tab");*/
 					current = 9;
-					translate[(int)orig[i]] = 9;
+					translate[over] = 9;
 				}
 				else{
+					/*printf("debug: %c\n",soln[k]);*/
 					
-					current = soln[k];
-					translate[(int)orig[i]] = soln[k];
+					current = soln[k];	
+					translate[over] = soln[k];
 				}
 			
 			}
 			else{
+				/*printf("Normal translate:%c\n",soln[k]);*/
 				current = soln[k];
-				translate[(int)orig[i]] = soln[k];
+				translate[over] = soln[k];
 			}	
 		}
 		else{
 			current = last;
-			translate[(int)orig[i]] = last;
+			translate[over] = last;
 		}
 		
 		check = 0;
@@ -61,6 +84,7 @@ void translate(char *orig, char *soln, char translate[]){
 		k++;	
 		i++;
 	}
+	
 
 }
 void translateDel(char *orig, char translate[]){
@@ -83,7 +107,7 @@ int main(int argc, char *argv[]){
 	char *sol;
 	char translated[256];
 	int curr;
-	int cc = 0;
+	
 	int count = 0; 
 	if(argc < 3){
 		fprintf(stderr, "Too few arguments\nUsage:\nmytr [-d] set1 set2\n");
