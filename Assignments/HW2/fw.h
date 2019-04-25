@@ -11,11 +11,14 @@ typedef struct Node{
 	struct Node *next;
 } Node;
 
-void read(FILE *, Node *[]);
+typedef struct Map{
+	Node *table;
+} Map;
+void read(FILE *, Map *);
 
 Node * form(Node[], int);
 
-void insert(char *, Node* []);
+void insert(char *, Map *);
 
 int get_num_items(Node[]);
 

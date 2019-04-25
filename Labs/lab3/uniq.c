@@ -12,7 +12,7 @@ char *read_long_line(FILE *file){
 	while((c = fgetc(file))!=EOF && c != '\n'){
 		count ++;
 		if(count>size){
-			line = (char *)realloc(line,sizeof(char)*count+1);
+			line = (char *)realloc(line,sizeof(char)*count+2);
 			size = count;
 		}
 		line[move] = c;
@@ -21,12 +21,13 @@ char *read_long_line(FILE *file){
 	if(c!=EOF){
 		count ++;
 		if(count>size){
-			line = (char *)realloc(line,sizeof(char)*count+1);
+			line = (char *)realloc(line,sizeof(char)*count+2);
 			size = count;
 			}
 		line[move] = c;
 		move++;
 	}
+	line[move] = '\0';
 	return line;
 }
 
