@@ -18,6 +18,10 @@ typedef struct List{
 	int size;
 } List;
 
+typedef struct Freq{
+	int table[256];
+} Freq;
+
 int comp(Node, Node);
 
 void insert(List *, Node *);
@@ -30,11 +34,5 @@ void build_tree(List *, Tree *);
 
 void create_code_helper(Node *, char [][256], char [256]);
 
-void write_header(int *,int);
-
-void create_code(Tree *, char[][256]);
-
-char * create_header(int *);
-
-void write_encode(int, int, char [][256],int);
+void read_header( Freq *, int);
 #endif
