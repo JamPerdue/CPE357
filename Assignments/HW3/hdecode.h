@@ -1,5 +1,5 @@
-#ifndef HENCODE_H
-#define HENCODE_H
+#ifndef HDECODE_H
+#define HDECODE_H
 
 typedef struct Node{
 	char c;

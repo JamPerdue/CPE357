@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>  
-#include "hencode.h"
+#include "hdecode.h"
 #include <string.h>
 #include <unistd.h>
 #include <stdint.h>
@@ -26,7 +26,7 @@ int comp(Node first, Node second){
 }
 	
 void insert(List *list , Node * node){
-	int i = 0;
+
 	Node * n = node;
 	Node * prev;
 	Node * nex = NULL;
@@ -162,7 +162,8 @@ void read_header(Freq *freqs, int file){
 	for(i = 1; i < num_chars+1; i++){
 		read(file, buff2, 1);
 		read(file, buff1, 4);
-		*freqs.table[buff2[0]] = buff1[0];
+		/*printf("Char: %c freq %d\n",buff2[0],buff1[0]);*/
+		freqs->table[buff2[0]] = buff1[0];
 	}
 
 
@@ -178,6 +179,9 @@ int main(int argc, char *argv[]){
 	list.head = NULL;
 	tree.head = NULL;
 
+	for(i = 0; i < 256; i++){
+		freq_table.table[i] = 0;
+	}
 	if(argc > 1){
                  file_in = open(argv[1],O_RDONLY);
 	}
@@ -194,6 +198,7 @@ int main(int argc, char *argv[]){
 			temp->c = i;
 			temp->freq = freq_table.table[i];
 			temp->next = NULL;
+	/*		printf("Inserting %c freq %d\n",temp->c, temp->freq);*/
 			insert(&list, temp);
 		}
 	}

@@ -37,4 +37,6 @@ void create_code(Tree *, char[][256]);
 char * create_header(int *);
 
 void write_encode(int, int, char [][256],int);
+
+void freetree_help(Node *);
 #endif

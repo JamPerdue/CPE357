@@ -106,7 +106,6 @@ void build_tree(List * list, Tree * tree){
 		new = (Node *)malloc(sizeof(Node));
 		new->freq = first->freq + second->freq;
 		new->c = -1;
-		printf("freq: %d\n",new->freq);
 		new->right = second;
 		new->left = first;	
 		insert(list,new);
@@ -197,7 +196,8 @@ void write_encode(int file_in, int file_out, char codes[][256],int total_c){
 	int tot_bytes = 0;
 	int bit_counter = 1;
 	int current = 0;
-	int mask = 128;	
+	uint8_t mask = 128;	
+	uint8_t masknot= ~mask;
 	uint8_t byte = 0;
 	while(read(file_in, buf_r, sizeof(char)) > 0){
 		/*printf("%d\n",buf_r[0]);*/	
@@ -205,38 +205,47 @@ void write_encode(int file_in, int file_out, char codes[][256],int total_c){
 			if(codes[buf_r[0]][i]=='1'){
 				byte = byte | mask;
 
+/*			printf("curr1: %x\n",byte);*/
 				mask = mask >> 1;
-				printf("1");
+				
 				code_size++;	
 				bit_counter++;
-				if(bit_counter>=8){
-				/*	printf("byte %x\n",buf_w[current]);*/
+				if(bit_counter>8){
 					buf_w[current] = byte;
+				
+			
+					byte = 0;
 					current++;
+				
+					
 					mask = 128;
 					bit_counter = 1;
 				}
 			}
 			else if(codes[buf_r[0]][i] == '0'){
-
+				/*masknot = ~mask;
+				byte = byte & masknot;*/
 				mask = mask >> 1;
-				printf("0");
+				/*printf("0");*/
+				/*printf("curr0: %x\n",byte);*/
 
 				code_size++;
 				bit_counter++;
-				if(bit_counter >= 8){
+				if(bit_counter > 8){
 					buf_w[current] = byte;
+					byte = 0;
 					current++;
+			
+
 					mask = 128;
 					bit_counter = 1;
 				}
 			}
 		}
 	}
-	printf("\n");
-	/*printf("totbytes : %d\n",code_size);*/
+		/*printf("totbytes : %d\n",code_size);*/
 	tot_bytes = code_size/ 8;
-	printf("Tot: %d\n",tot_bytes);
+	
 	if(bit_counter > 0 && bit_counter != 8){
 		tot_bytes++;
 		}
@@ -244,7 +253,15 @@ void write_encode(int file_in, int file_out, char codes[][256],int total_c){
 	write(file_out,buf_w,tot_bytes);
 		free(buf_w);
 }
-
+void freetree_help(Node *curr){
+	if(curr->left != NULL){
+		freetree_help(curr->left);
+	}
+	if(curr->right != NULL){
+		freetree_help(curr->right);
+	}
+	free(curr);
+}
 int main(int argc, char * argv[]){
 	Tree tree;
 	List list;
@@ -275,27 +292,26 @@ int main(int argc, char * argv[]){
 		table[buf[0]]++;	
 		total_chars++;
 	}
-	
+	/*
 	for(i = 0; i < 256; i++){
 		if(table[i]>0){
 			printf("Char: %d, Freq: %d\n", i, table[i]);
 		}
-	}
+	}*/
 	/* build freq tabnle*/
 	for(i = 0; i< 256; i++){
 		if(table[i]>0){
 			temp = (Node *)malloc(sizeof(Node));
 			temp->c = i;
 			temp->freq = table[i];
-			printf("testfreq: %d\n",temp->freq);
 			insert(&list, temp);
 		}
 	}	
 	temp = list.head;
-	while(temp!= NULL){
+	/*while(temp!= NULL){
 		printf("Char %c, Freq %d\n", temp->c, temp->freq);
 		temp = temp->next;
-	}
+	}*/
 	build_tree(&list, &tree);
 	for(i = 0; i< 256; i++){
 		code_table[i][0] = '\0';
@@ -309,11 +325,11 @@ int main(int argc, char * argv[]){
 		file_out = STDOUT_FILENO;
 	}
 
-	for(i = 0; i < 256; i++){
+	/*for(i = 0; i < 256; i++){
 		if(table[i]>0){
 			printf("Code %d: %s\n",i, code_table[i]);
 		}
-	}	
+	}*/	
 	write_header(table, file_out);
 	
 	lseek(file_in,0, SEEK_SET);
@@ -322,8 +338,10 @@ int main(int argc, char * argv[]){
 	
 	close(file_in);
 
-	printf("break\n");
-
-
+	
+	close(file_out);
+	
+	freetree_help(tree.head);
+	free(table);
 	return 0;
 }

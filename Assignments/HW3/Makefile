@@ -4,7 +4,7 @@
 CC = gcc
 CFLAGS = -Wall -ansi -pedantic -lm -g
 MAIN = hencode
-OBJS = hencode.o, hdecode.o
+OBJS = hencode.o
   
    # Rules
   #
