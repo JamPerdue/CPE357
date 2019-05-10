@@ -246,7 +246,7 @@ void write_encode(int file_in, int file_out, char codes[][256],int total_c){
 		/*printf("totbytes : %d\n",code_size);*/
 	tot_bytes = code_size/ 8;
 	
-	if(bit_counter > 0 && bit_counter != 8){
+	if(bit_counter > 1 && bit_counter <= 8){
 		tot_bytes++;
 		}
 	
@@ -340,8 +340,9 @@ int main(int argc, char * argv[]){
 
 	
 	close(file_out);
-	
-	freetree_help(tree.head);
-	free(table);
+	if(tree.head !=NULL){	
+		freetree_help(tree.head);
+		free(table);
+	}
 	return 0;
 }

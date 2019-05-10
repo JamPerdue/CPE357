@@ -34,5 +34,13 @@ void build_tree(List *, Tree *);
 
 void create_code_helper(Node *, char [][256], char [256]);
 
+
+void create_code(Tree *, char[][256]);
+
 void read_header( Freq *, int);
+
+void read_body(Tree *, int, int, int);
+
+void freetree_help(Node *);
+
 #endif

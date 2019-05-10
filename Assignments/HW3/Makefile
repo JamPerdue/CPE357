@@ -9,19 +9,9 @@ OBJS = hencode.o
    # Rules
   #
  
-all:$(MAIN)
- 
-$(MAIN) :$(OBJS) hencode.h
-	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS)
- 
-#$(MAIN) :$(OBJS) hdecode.h
-#	$(CC) $(CFLAGS) -o $(MAIN) $(OBJS)
-
-hencode.o : hencode.c hencode.h
-	$(CC) $(CFLAGS) -c hencode.c
- 
-hdecode.o : hdecode.c hdecode.h
-	$(CC) $(CFLAGS) -c hdecode.c
+all: 
+	${CC} ${CFLAGS} hencode.c hencode.h -o hencode
+	${CC} ${CFLAGS} hdecode.c hdecode.h -o hdecode
 
 clean :
 	 rm *.o $(MAIN) core
