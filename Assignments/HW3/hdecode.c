@@ -307,7 +307,7 @@ int main(int argc, char *argv[]){
 		}
 	}
 	build_tree(&list,&tree);
-	create_code( &tree, code_table);
+/*	create_code( &tree, code_table);*/
 
 /*	for(i = 0; i < 256; i++){
 		if(freq_table.table[i]>0){

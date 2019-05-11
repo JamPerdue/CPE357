@@ -15,9 +15,6 @@ int comp(Node first, Node second){
 	else if( first.freq > second.freq){
 		return 1;
 	}
-	else if(first.c == -1){
-		return 0;
-	}
 	else{
 		if(first.c > second.c){
 			return 1;
@@ -105,10 +102,10 @@ void build_tree(List * list, Tree * tree){
 		second = pop(list);
 		new = (Node *)malloc(sizeof(Node));
 		new->freq = first->freq + second->freq;
-		new->c = -1;
 		new->right = second;
 		new->left = first;	
-		insert(list,new);
+/*		printf("Node freq: %d at loc: %p, Right: %p, Left: %p\n", new->freq, new, new->right, new->left);
+*/		insert(list,new);
 	}	
 	tree->head = list->head;
 }
@@ -133,12 +130,13 @@ void create_code_helper(Node * node, char codes[][256], char code[256]){
 	char temp[256];
 	strcpy(temp,code);	
 	/*printf("Codetemp: %s\n",temp);	*/
-	if(node == NULL){
+/*	printf("Node: {byte: %c, freq: %d, left: %p, right: %p}\n", node->c, node->freq, node->left, node->right);
+*/	if(node == NULL){
 		return; 	
 	}
 	else if(node->left == NULL && node->right == NULL){
 		if(node->c != 0){
-			strcpy(codes[(int)node->c],code);
+			strcpy(codes[(unsigned int)node->c],code);
 
 			/*codes[(int)node->c] = code;*/
 		}
@@ -244,6 +242,9 @@ void write_encode(int file_in, int file_out, char codes[][256],int total_c){
 		}
 	}
 		/*printf("totbytes : %d\n",code_size);*/
+	if(buf_w[current] == 0){
+		buf_w[current] = byte;
+	}
 	tot_bytes = code_size/ 8;
 	
 	if(bit_counter > 1 && bit_counter <= 8){
@@ -302,8 +303,11 @@ int main(int argc, char * argv[]){
 	for(i = 0; i< 256; i++){
 		if(table[i]>0){
 			temp = (Node *)malloc(sizeof(Node));
-			temp->c = i;
+			temp->c = (uint8_t)i;
 			temp->freq = table[i];
+			temp->right = NULL;
+			temp->left = NULL;
+			temp->next = NULL;
 			insert(&list, temp);
 		}
 	}	
@@ -316,8 +320,9 @@ int main(int argc, char * argv[]){
 	for(i = 0; i< 256; i++){
 		code_table[i][0] = '\0';
 	}
-	create_code(&tree,code_table);
-
+	if(tree.head !=NULL){
+		create_code(&tree,code_table);
+	}
 	if(argc > 2){
 		file_out = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644 );
 	}

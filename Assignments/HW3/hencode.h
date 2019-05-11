@@ -1,8 +1,8 @@
 #ifndef HENCODE_H
 #define HENCODE_H
-
+#include <stdint.h>
 typedef struct Node{
-	char c;
+	uint8_t c;
 	int freq;
 	struct Node *right;
 	struct Node *left;
