@@ -1,0 +1,195 @@
+
+==========================================
+1) General test: no arguments  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    No arguments
+    : Success
+  --------------------------
+
+==========================================
+2) General test: no C, T, or X  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    STOP: Success
+  --------------------------
+
+==========================================
+3) General test: f switch with no filename  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+4) General test: Trying to list a bad tarfile  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+5) Creation test: One named file  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 1024
+      Reference: 2048
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+6) Creation test: One named binary file  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 1024
+      Reference: 2048
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+7) Creation test: Two Named Files  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 1024
+      Reference: 3072
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+8) Creation test: Three Named Files, one nonexistent  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 1536
+      Reference: 3072
+  --------------------------
+  Submitted's stdout:
+    BogusName
+    BogusName
+    modestr: 0
+    unknown?
+    size: 0
+    root
+    root
+    check 5750
+    head
+  --------------------------
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+9) Creation test: Directory with children  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 2560
+      Reference: 625152
+  --------------------------
+  Submitted's stdout:
+    test2
+    Curly
+    Curly
+    modestr: 0
+    unknown?
+    size: 0
+    root
+    root
+    check 5166
+    head
+    test2
+    Larry
+    Larry
+    modestr: 0
+    unknown?
+    size: 0
+    root
+    root
+    check 5161
+    head
+    test2
+    Moe
+    Moe
+    modestr: 0
+    unknown?
+    size: 0
+    root
+    root
+    check 5612
+    head
+  --------------------------
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+10) Creation test: Directory with grandchildren  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 2048
+      Reference: 1873920
+  --------------------------
+  Submitted's stderr:
+    Child process (27164) exited due to signal (Segmentation fault).
+    ^[[A  --------------------------
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+11) Creation test: Deep Tree, all in name  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 14336
+      Reference: 83968
+  --------------------------
+  Submitted's stderr:
+    Child process (27198) exited due to signal (Segmentation fault).
+  --------------------------
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+12) Creation test: Deep Tree, moves into prefix  (FAILURE)
+==========================================
+*** Archive size mismatch:
+      Submitted: 15360
+      Reference: 84992
+  --------------------------
+  Submitted's stderr:
+    Child process (27231) exited due to signal (Segmentation fault).
+  --------------------------
+  --------------------------
+  No listing for submitted's archive.
+  --------------------------
+
+==========================================
+13) Listing test: single text file, non-verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1
+    > JustAFile
+  --------------------------

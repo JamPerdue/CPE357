@@ -16,11 +16,13 @@ void listdir(char *, int, int);
 
 void writebody(char *, int);
 
-void parse_cm(char *, char *, char *);
+void parse_cm(char *, char *, char *, int);
 
-void create(char *, char *);
+void create(int, char *, int);
 
 void table(char *, int);
+
+void dirtrav(char *, int);
 
 void extract(char *, char *);
 
