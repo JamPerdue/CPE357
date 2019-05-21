@@ -16,11 +16,9 @@ void listdir(char *, int, int);
 
 void writebody(char *, int);
 
-void parse_cm(char *, char *, char *, int);
-
 void create(int, char *, int);
 
-void table(char *, int);
+void table(int, char *, int);
 
 void dirtrav(char *, int);
 

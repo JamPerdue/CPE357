@@ -56,7 +56,6 @@ uint8_t * pack_header(char *name){
 	for(i = 0; i<512; i++){
 		block[i] = '\0';
 	}
-	printf("%s\n",name);
 	for(i = 0; i<strlen(name); i++){
 		block[i] = name[i];
 		namecounter++;
@@ -69,9 +68,8 @@ uint8_t * pack_header(char *name){
 		block[i] = '\0';
 	}
 	/*printf("mode %o\n",file_stat.st_mode);	*/
-	printf("%s\n",block);
+	/*printf("%s\n",block);*/
 	sprintf(mode, "%o", file_stat.st_mode);
-	printf("modestr: %s\n", mode);
 	for(i = 100, j = 0; i <108; i++, j++){
 		block[i] = mode[j];		
 		/*printf("mod: %d\n",mode[j]);*/
@@ -92,8 +90,9 @@ uint8_t * pack_header(char *name){
 	for(i = 124, j = 0; i <136; i++, j++){
 		block[i] = size[j];		
 	}  SIZE*/
-
+	printf("ftime: %d\n", file_stat.st_mtime);
 	sprintf(mtime, "%o", file_stat.st_mtime);	
+	printf("time: %s\n", mtime);
 	for(i = 136, j = 0; i< 148; i++, j++){
 		block[i] = mtime[j];
 	} /* MTIME */
@@ -120,7 +119,7 @@ uint8_t * pack_header(char *name){
 	if(block[156] != '5'){		 
 	
 		sprintf(size, "%o", file_stat.st_size);
-		printf("size: %s\n",size);
+		/*printf("size: %s\n",size);*/
 		for(i = 124, j = 0; i <136; i++, j++){
 			block[i] = size[j];		
 		}
@@ -187,18 +186,19 @@ uint8_t * pack_header(char *name){
 		block[i] = dmin[j];		
 	}
 	/*devices*/
-	if(namecounter < strlen(name)-1){
+	/*if(namecounter < strlen(name)-1){
 		printf("left\n");
-		for(i = 345, j = namecounter; j < strlen(name); i++, j++){
-			block[i] = name[j];
+		for(i = 345; i<500; i++){
+			block[i] = name[namecounter];
+			namecounter++;
 		}
-	}
+	}*/
 	/* prefix*/
 	for(i = 0; i< 500; i++){
 		checksum += block[i];
 	}
 	sprintf(check, "%o", checksum);
-	printf("check %s\n",check);
+	/*printf("check %s\n",check);*/
 	for(i = 148, j = 0; i<156; i++, j++){
 		block[i] = check[j];
 	}
@@ -241,11 +241,11 @@ void writebody(char * file, int file_out){
 	file_in = open(file, O_RDONLY);
 	block = pack_header(file);
 	write(file_out, block, 512);
-	printf("writing %s\n", file);	
+	/*printf("writing %s\n", file);	*/
 	memset(block_out, 0, 512);
 	while((i = read(file_in, block_out, 512)) >0){
 		write(file_out, block_out, 512);
-		perror("Write error");
+		/*perror("Write error");*/
 		memset(block_out, 0 ,512);
 	}
 	memset(block_out, 0 ,512);
@@ -257,7 +257,6 @@ void dirtrav(char *name, int file_out){
 	struct dirent *entry;
 	struct stat filestats;
 	char *temp = "/";
-	int len = 0;
 	lstat(name, &filestats);
 	if((filestats.st_mode & S_IFMT) != S_IFDIR){
 		writebody(name, file_out);
@@ -274,23 +273,22 @@ void dirtrav(char *name, int file_out){
 		if(entry->d_type == DT_DIR){
 			if(strcmp(entry->d_name, ".") == 0 || 
 				strcmp(entry->d_name, "..") == 0){
-				printf("cont\n");
 				continue;
 			}
 			strcat(path,temp);
 			strcat(path, entry->d_name);
-			printf("test1\n");
-			printf("path: %s\n",path);
+			/*printf("test1\n");
+			printf("path: %s\n",path);*/
 
 			dirtrav(path, file_out);
 			writebody(entry->d_name, file_out);
 		}
 		else{
-			printf("test2\n");
-			printf("%s\n", entry->d_name);
+			/*printf("test2\n");
+			printf("%s\n", entry->d_name);*/
 			strcat(path, temp);
 			strcat(path, entry->d_name);
-			printf("pppath:%s\n", path);
+	/*		printf("pppath:%s\n", path);*/
 
 			writebody(path, file_out);
 		}
@@ -299,73 +297,31 @@ void dirtrav(char *name, int file_out){
 
 	closedir(dir);
 }
-/*void listdir(char * name, int level, int file_out){
-    DIR *dir;
-    struct dirent *entry;
-    char path[1024];
-    int len = 0;
-    if (!(dir = opendir(name))){
-	writebody(name,file_out);
-        return;
-	}
-    if (!(entry = readdir(dir)))
-        return;
-
-    do {
-        if (entry->d_type == DT_DIR) {
-	len = snprintf(path, sizeof(path)-1, "%s/%s", name, entry->d_name);
-	path[len] = 0;
-	if(strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0){
-                continue;
-		}
-            printf("test1\n");
-            listdir(path, level, file_out);
-		writebody(entry->d_name, file_out);
-        }
-        else{
-            printf("test2\n");
-		writebody(entry->d_name, file_out);
-        }
-    } while(entry = readdir(dir));
-
-	writebody(name, file_out);
-    closedir(dir);
-
-}*/
-/*void table(char *tarfile, int v){
-	int file_in = open(tarfile, O_RDONLY);
+void table(int file_read, char *name, int v){
 	int i = 0;
 	uint8_t buff[512];
 	int bytesread = 0;
-	while((bytesread = read(file_in, buff, 512))> 0){
-		
-
-	}
-}*/
-/*void parse_cm(char * cm, char *tarfile, char *path, int file_out){
-	int i = 0;
-	int v = 0;
-	if(cm[0] == 'c'){
-		create(file_out,path);
-	}
-	else if(cm[0] == 't'){
-		if(cm[1] == 'v'){
-			v = 1;
-		}
-		table(tarfile, v);
-	}
-	else if(cm[0] =='x'){
-		extract(tarfile, path);
+	char * sizestring;
+	char *ptr;
+	int amount = 0;
+	if(name != NULL){
+	
 	}
 	else{
-		perror("Need c t or x");
+		read(file_read, buff, 512);
+		/*printf("First header: %s\n", buff);*/
+		/*strcpy(sizestring, buff+124);*/
+		/*printf("size: %s\n", sizestring);*/
+		/*amount = (int) strtol(sizestring, &ptr, 10);*/
+		printf("%s\n", buff);
 	}
 }
-*/
+
 void proper_parse(int argc, char **argv){
 	int v = 0;
 	int file_out = 0;
 	int i =0;
+	int file_read = 0;
 	uint8_t buf[512];
 	if(argv[1][0] == 'c'){
 		if(argv[1][1] == 'v'){
@@ -392,15 +348,33 @@ void proper_parse(int argc, char **argv){
 
 		close(file_out);
 	}
+	else if(argv[1][0] == 't'){
+		if(argv[1][1] == 'v'){
+			v = 1;
+		}
+		if(argc <= 2){
+			perror("need tarfile");
+			return;
+		}
+		if((file_read = open(argv[2], O_RDONLY)) >0){
+			if(argc > 3){
+				for(i = 3; i< argc; i++){
+					lseek(file_read, 0, SEEK_SET);
+					table(file_read, argv[i], v);
+				}
+			}
+			else{
+				table(file_read, NULL, v);
+			}
+			close(file_read);	
+		}
+		else{
+			perror("bad tar");
+		}
+	}
 	
 }	
 int main(int argc, char *argv[]){
-	char * path = "";
-	char * tarfile = "";
-	int i = 0;
-	int tarfile_read = 0;
-	uint8_t blockbuf[512];
-	int file_out;
 	if(argc <= 1){
 		perror("No arguments\n");
 		return 1;

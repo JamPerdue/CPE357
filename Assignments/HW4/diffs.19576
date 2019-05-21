@@ -1,0 +1,1047 @@
+
+==========================================
+1) General test: no arguments  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    No arguments
+    : Success
+  --------------------------
+
+==========================================
+2) General test: no C, T, or X  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    STOP: Success
+  --------------------------
+
+==========================================
+3) General test: f switch with no filename  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    need tarfile: Success
+  --------------------------
+
+==========================================
+4) General test: Trying to list a bad tarfile  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    ^?ELF^B^A^A
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+5) Creation test: One named file  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 181 2011-02-08 14:49 JustAFile
+  --------------------------
+
+==========================================
+6) Creation test: One named binary file  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 128 2011-02-08 14:49 JustABinaryFile
+  --------------------------
+
+==========================================
+7) Creation test: Two Named Files  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 128 2011-02-08 14:49 JustABinaryFile
+    -r--r--r-- pn-cs357/domain users 181 2011-02-08 14:49 JustAFile
+  --------------------------
+
+==========================================
+8) Creation test: Three Named Files, one nonexistent  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 128 2011-02-08 14:49 JustABinaryFile
+    -r--r--r-- pn-cs357/domain users 181 2011-02-08 14:49 JustAFile
+  --------------------------
+
+==========================================
+9) Creation test: Directory with children  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeOneLevel/
+    -r--r--r-- pn-cs357/domain users 127 2011-02-08 14:49 TreeOneLevel/Curly
+    -r--r--r-- pn-cs357/domain users 204 2011-02-08 14:49 TreeOneLevel/Larry
+    -r--r--r-- pn-cs357/domain users  67 2011-02-08 14:49 TreeOneLevel/Moe
+    tar: Exiting with failure status due to previous errors
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+  --------------------------
+
+==========================================
+10) Creation test: Directory with grandchildren  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeTwoLevels/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeTwoLevels/Paper/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeTwoLevels/Rock/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeTwoLevels/Scissors/
+    -r--r--r-- pn-cs357/domain users 127 2011-02-08 14:49 TreeTwoLevels/Paper/Curly
+    -r--r--r-- pn-cs357/domain users 127 2011-02-08 14:49 TreeTwoLevels/Rock/Curly
+    -r--r--r-- pn-cs357/domain users 127 2011-02-08 14:49 TreeTwoLevels/Scissors/Curly
+    -r--r--r-- pn-cs357/domain users 204 2011-02-08 14:49 TreeTwoLevels/Paper/Larry
+    -r--r--r-- pn-cs357/domain users 204 2011-02-08 14:49 TreeTwoLevels/Rock/Larry
+    -r--r--r-- pn-cs357/domain users 204 2011-02-08 14:49 TreeTwoLevels/Scissors/Larry
+    -r--r--r-- pn-cs357/domain users  67 2011-02-08 14:49 TreeTwoLevels/Paper/Moe
+    -r--r--r-- pn-cs357/domain users  67 2011-02-08 14:49 TreeTwoLevels/Rock/Moe
+    -r--r--r-- pn-cs357/domain users  67 2011-02-08 14:49 TreeTwoLevels/Scissors/Moe
+    tar: Exiting with failure status due to previous errors
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+  --------------------------
+
+==========================================
+11) Creation test: Deep Tree, all in name  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/One/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/One/Five/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/One/Four/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/One/Six/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Three/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Three/Five/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Three/Four/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Three/Six/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Two/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Two/Five/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Two/Four/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreeNoPrefix/Two/Six/
+    -r--r--r-- pn-cs357/domain users 100 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    -r--r--r-- pn-cs357/domain users  13 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    -r--r--r-- pn-cs357/domain users 140 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    -r--r--r-- pn-cs357/domain users 161 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    -r--r--r-- pn-cs357/domain users 164 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd6
+    -r--r--r-- pn-cs357/domain users 172 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd2
+    -r--r--r-- pn-cs357/domain users 175 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd4
+    -r--r--r-- pn-cs357/domain users 179 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd5
+    -r--r--r-- pn-cs357/domain users 188 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    -r--r--r-- pn-cs357/domain users 188 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    -r--r--r-- pn-cs357/domain users 210 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    -r--r--r-- pn-cs357/domain users 212 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd1
+    -r--r--r-- pn-cs357/domain users   2 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd3
+    -r--r--r-- pn-cs357/domain users 221 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    -r--r--r-- pn-cs357/domain users 239 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd8
+    -r--r--r-- pn-cs357/domain users 246 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    -r--r--r-- pn-cs357/domain users 250 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    -r--r--r-- pn-cs357/domain users 253 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    -r--r--r-- pn-cs357/domain users 254 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    -r--r--r-- pn-cs357/domain users 254 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd0
+    -r--r--r-- pn-cs357/domain users  32 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    -r--r--r-- pn-cs357/domain users  65 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd9
+    -r--r--r-- pn-cs357/domain users  80 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    -r--r--r-- pn-cs357/domain users  83 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    -r--r--r-- pn-cs357/domain users  91 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd7
+    tar: Exiting with failure status due to previous errors
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+  --------------------------
+
+==========================================
+12) Creation test: Deep Tree, moves into prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/One/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/One/Five/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/One/Four/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/One/Six/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Three/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Three/Five/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Three/Four/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Three/Six/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Two/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Two/Five/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Two/Four/
+    dr-xr-xr-x pn-cs357/domain users   0 2011-02-08 14:49 TreePrefix/Two/Six/
+    -r--r--r-- pn-cs357/domain users 100 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    -r--r--r-- pn-cs357/domain users  13 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    -r--r--r-- pn-cs357/domain users 140 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    -r--r--r-- pn-cs357/domain users 161 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    -r--r--r-- pn-cs357/domain users 164 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 172 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 175 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 179 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 188 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    -r--r--r-- pn-cs357/domain users 188 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    -r--r--r-- pn-cs357/domain users 210 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    -r--r--r-- pn-cs357/domain users 212 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users   2 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 221 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    -r--r--r-- pn-cs357/domain users 239 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 246 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    -r--r--r-- pn-cs357/domain users 250 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    -r--r--r-- pn-cs357/domain users 253 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    -r--r--r-- pn-cs357/domain users 254 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    -r--r--r-- pn-cs357/domain users 254 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users  32 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    -r--r--r-- pn-cs357/domain users  65 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users  80 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    -r--r--r-- pn-cs357/domain users  83 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    -r--r--r-- pn-cs357/domain users  91 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    tar: Exiting with failure status due to previous errors
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+    tar: Skipping to next header
+  --------------------------
+
+==========================================
+13) Listing test: single text file, non-verbose  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustAFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+14) Listing test: single binary file, non-verbose  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustABinaryFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+15) Listing test: single text file, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustAFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1c1
+    < JustAFile
+    ---
+    > -rw------- pnico/pnico            181 2010-12-09 18:46 JustAFile
+  --------------------------
+
+==========================================
+16) Listing test: single binary file, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustABinaryFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1c1
+    < JustABinaryFile
+    ---
+    > -rw------- pnico/pnico            128 2010-12-10 06:06 JustABinaryFile
+  --------------------------
+
+==========================================
+17) Listing test: Two files in archive, non-verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustAFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1a2
+    > JustAnotherFile
+  --------------------------
+
+==========================================
+18) Listing test: Two files in archive, one named, non-verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1
+    > JustAnotherFile
+  --------------------------
+
+==========================================
+19) Listing test: Two files in archive, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustAFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1c1,2
+    < JustAFile
+    ---
+    > -rw--w--w- pnico/pnico            181 2010-12-09 18:46 JustAFile
+    > -rw------- pnico/pnico         283455 2010-12-10 09:24 JustAnotherFile
+  --------------------------
+
+==========================================
+20) Listing test: Two files in archive, one named  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1
+    > -rw------- pnico/pnico         283455 2010-12-10 09:24 JustAnotherFile
+  --------------------------
+
+==========================================
+21) Listing test: List a deep tree, no prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    TreeNoPrefix/
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1a2,45
+    > TreeNoPrefix/Two/
+    > TreeNoPrefix/Two/Five/
+    > TreeNoPrefix/Two/Four/
+    > TreeNoPrefix/Two/Six/
+    > TreeNoPrefix/One/
+    > TreeNoPrefix/One/Five/
+    > TreeNoPrefix/One/Four/
+    > TreeNoPrefix/One/Six/
+    > TreeNoPrefix/Three/
+    > TreeNoPrefix/Three/Five/
+    > TreeNoPrefix/Three/Four/
+    > TreeNoPrefix/Three/Six/
+    > TreeNoPrefix/Deep/
+    > TreeNoPrefix/Deep/Deeper/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd5
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd9
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd4
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd2
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd3
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd8
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd6
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd0
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd7
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd1
+  --------------------------
+
+==========================================
+22) Listing test: List a deep tree, no prefix, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    TreeNoPrefix/
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1c1,45
+    < TreeNoPrefix/
+    ---
+    > drwx------ pnico/pnico              0 2010-12-10 08:36 TreeNoPrefix/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Two/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Two/Five/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Two/Four/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Two/Six/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/One/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/One/Five/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/One/Four/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/One/Six/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Three/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Three/Five/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Three/Four/
+    > drwx------ pnico/pnico              0 2010-12-10 08:28 TreeNoPrefix/Three/Six/
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/Deeper/
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/Deeper/EvenDeeper/
+    > drwx------ pnico/pnico              0 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    > -r-------- pnico/pnico            506 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    > -rw------- pnico/pnico          17106 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    > -rw------- pnico/pnico           1056 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    > -r-------- pnico/pnico           2643 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    > -rw------- pnico/pnico            758 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    > -rw------- pnico/pnico           3838 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    > -r-------- pnico/pnico            188 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    > -rw------- pnico/pnico          13756 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    > -r-------- pnico/pnico           2660 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    > -r-------- pnico/pnico            140 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    > -rw------- pnico/pnico           2045 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > -r-------- pnico/pnico            336 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    > -rw------- pnico/pnico           1697 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    > -rw------- pnico/pnico           1293 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    > -rw------- pnico/pnico           2269 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    > drwx------ pnico/pnico              0 2010-12-10 11:17 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    > -rw------- pnico/pnico            179 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd5
+    > -rw------- pnico/pnico            321 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd9
+    > -rw------- pnico/pnico            431 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd4
+    > -rw------- pnico/pnico            172 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd2
+    > -rw------- pnico/pnico            258 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd3
+    > -rw------- pnico/pnico            239 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd8
+    > -rw------- pnico/pnico            164 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd6
+    > -rw------- pnico/pnico            254 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd0
+    > -rw------- pnico/pnico            347 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd7
+    > -rw------- pnico/pnico            724 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd1
+  --------------------------
+
+==========================================
+23) Listing test: List named files, no prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1,2
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+  --------------------------
+
+==========================================
+24) Listing test: List named files, no prefix, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1,2
+    > -rw------- pnico/pnico           2045 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > -rw------- pnico/pnico           1293 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+  --------------------------
+
+==========================================
+25) Listing test: List a deep tree, prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    TreePrefix/
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1a2,47
+    > TreePrefix/Two/
+    > TreePrefix/Two/Five/
+    > TreePrefix/Two/Four/
+    > TreePrefix/Two/Six/
+    > TreePrefix/One/
+    > TreePrefix/One/Five/
+    > TreePrefix/One/Four/
+    > TreePrefix/One/Six/
+    > TreePrefix/Three/
+    > TreePrefix/Three/Five/
+    > TreePrefix/Three/Four/
+    > TreePrefix/Three/Six/
+    > TreePrefix/Deep/
+    > TreePrefix/Deep/Deeper/
+    > TreePrefix/Deep/Deeper/EvenDeeper/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-3
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-7
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-2
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-9
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-4
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-8
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-0
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-1
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-5
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-6
+  --------------------------
+
+==========================================
+26) Listing test: List a deep tree, prefix, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    TreePrefix/
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    1c1,47
+    < TreePrefix/
+    ---
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Two/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Two/Five/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Two/Four/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Two/Six/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/One/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/One/Five/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/One/Four/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/One/Six/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Three/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Three/Five/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Three/Four/
+    > drwx------ pnico/pnico              0 2010-12-10 08:38 TreePrefix/Three/Six/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    > -r-------- pnico/pnico            506 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    > -rw------- pnico/pnico          17106 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    > -rw------- pnico/pnico           1056 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    > -r-------- pnico/pnico           2643 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    > -rw------- pnico/pnico            758 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    > -rw------- pnico/pnico           3838 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    > -r-------- pnico/pnico            188 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    > -rw------- pnico/pnico          13756 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    > -r-------- pnico/pnico           2660 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    > -r-------- pnico/pnico            140 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    > -rw------- pnico/pnico           2045 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > -r-------- pnico/pnico            336 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    > -rw------- pnico/pnico           1697 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    > -rw------- pnico/pnico           1293 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    > -rw------- pnico/pnico           2269 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/
+    > drwx------ pnico/pnico              0 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/
+    > -rw------- pnico/pnico            258 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-3
+    > -rw------- pnico/pnico            347 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-7
+    > -rw------- pnico/pnico            172 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-2
+    > -rw------- pnico/pnico            321 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-9
+    > -rw------- pnico/pnico            431 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-4
+    > -rw------- pnico/pnico            239 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-8
+    > -rw------- pnico/pnico            254 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-0
+    > -rw------- pnico/pnico            724 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-1
+    > -rw------- pnico/pnico            179 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-5
+    > -rw------- pnico/pnico            164 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-6
+  --------------------------
+
+==========================================
+27) Listing test: List a deep tree, named, prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1,2
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-2
+    > TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-4
+  --------------------------
+
+==========================================
+28) Listing test: List a deep tree, prefix, named, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1,2
+    > -rw------- pnico/pnico            172 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-2
+    > -rw------- pnico/pnico            431 2010-12-10 08:37 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLevelToForceItIntoPrefix/Box/Treasure-4
+  --------------------------
+
+==========================================
+29) Listing test: Named subtree, no prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1,29
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd5
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd9
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd4
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd2
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd3
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd8
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd6
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd0
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd7
+    > TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd1
+  --------------------------
+
+==========================================
+30) Listing test: Named subtree, no prefix, verbose  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+  --------------------------
+  Differences ( < Submitted's > Reference):
+    0a1,29
+    > drwx------ pnico/pnico              0 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    > -r-------- pnico/pnico            506 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    > -rw------- pnico/pnico          17106 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    > -rw------- pnico/pnico           1056 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    > -r-------- pnico/pnico           2643 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    > -rw------- pnico/pnico            758 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+    > -rw------- pnico/pnico           3838 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    > -r-------- pnico/pnico            188 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    > -rw------- pnico/pnico          13756 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    > -r-------- pnico/pnico           2660 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    > -r-------- pnico/pnico            140 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    > -rw------- pnico/pnico           2045 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    > -r-------- pnico/pnico            336 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    > -rw------- pnico/pnico           1697 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    > -rw------- pnico/pnico           1293 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    > -rw------- pnico/pnico           2269 2010-12-10 08:33 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    > drwx------ pnico/pnico              0 2010-12-10 08:29 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    > drwx------ pnico/pnico              0 2010-12-10 11:17 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    > -rw------- pnico/pnico            179 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd5
+    > -rw------- pnico/pnico            321 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd9
+    > -rw------- pnico/pnico            431 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd4
+    > -rw------- pnico/pnico            172 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd2
+    > -rw------- pnico/pnico            258 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd3
+    > -rw------- pnico/pnico            239 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd8
+    > -rw------- pnico/pnico            164 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd6
+    > -rw------- pnico/pnico            254 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd0
+    > -rw------- pnico/pnico            347 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd7
+    > -rw------- pnico/pnico            724 2010-12-10 08:31 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd1
+  --------------------------
+
+==========================================
+31) Listing test: Shallow Tree w/symlink  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    TreeWithLinks/
+  --------------------------
+  --------------------------
+  Submitted's stderr:
