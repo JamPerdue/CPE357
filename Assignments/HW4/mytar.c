@@ -51,15 +51,45 @@ uint8_t * pack_header(char *name){
 	int min = 0;
 	int checksum = 0;
 	char check[8];
+	int k = 0;
 	lstat(name, &file_stat);
 
 	for(i = 0; i<512; i++){
 		block[i] = '\0';
 	}
-	for(i = 0; i<strlen(name); i++){
+/*	for(i = 0; i<strlen(name); i++){
 		block[i] = name[i];
 		namecounter++;
+	}*/
+	if(strlen(name)>99){
+		i = strlen(name)-101;
+		j = 0;
+		k = 345;
+		while(i> 0){
+			block[k] = name[j];
+			j++;
+			i++;
+			k++;
+		}
+		block[k]=0;
+		i = 0;
+		while(name[j]!=0){
+			block[i] =name[j];
+			i++;
+			j++;
+		}
+		if(i<100){
+		block[i] = 0;
+		}
 	}
+	else{
+		i = 0;
+		while(name[i]!= 0){
+			block[i] = name[i];
+			i++;
+		}
+		block[i] = 0;
+	}	
 	if(i<100 &&(file_stat.st_mode & S_IFMT) == S_IFDIR){
 		block[i] = '/';
 		i++;
@@ -90,9 +120,7 @@ uint8_t * pack_header(char *name){
 	for(i = 124, j = 0; i <136; i++, j++){
 		block[i] = size[j];		
 	}  SIZE*/
-	printf("ftime: %d\n", file_stat.st_mtime);
 	sprintf(mtime, "%o", file_stat.st_mtime);	
-	printf("time: %s\n", mtime);
 	for(i = 136, j = 0; i< 148; i++, j++){
 		block[i] = mtime[j];
 	} /* MTIME */
@@ -330,6 +358,31 @@ void table(int file_read, char *name, int v){
 	if(name != NULL){
 		if(v == 0){	
 		while(read(file_read, buff, 512)>0){
+		memset(namebuff,0,256);
+	if(buff[345] != '\0'){
+			i = 345;
+			j = 0;
+			while(buff[i] != '\0' && i<500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			i = 0;
+			namebuff[j] = '/';
+			j++;
+			while(i<100){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			namebuff[j] = '\0';
+		}
+		else{
+			for(i = 0; i< 100; i++){
+				namebuff[i] = buff[i];
+			}
+		}
+
 		for(i = 0, j = 124; i<12; i++, j++){
 			sizestring[i] = buff[j];
 		}
@@ -349,8 +402,8 @@ void table(int file_read, char *name, int v){
 			i++;
 		}*/
 				
-		if(buff[0]!= '\0'&&strcmp(buff,name)==0&& dircheck == 0){
-			printf("%s\n", buff);
+		if(namebuff[0]!='\0'&&strcmp(namebuff,name)==0&& dircheck == 0){
+			printf("%s\n", namebuff);
 		}
 		 blockcount = amount/512;
 		 rem = amount%512;
@@ -364,18 +417,38 @@ void table(int file_read, char *name, int v){
 		else{
 			
 			while(read(file_read, buff, 512)>0){
+			memset(namebuff, 0 ,256);
+		if(buff[345] != '\0'){
+			i = 345;
+			j = 0;
+			while(buff[i] != '\0' && i<500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			i = 0;
+			namebuff[j] = '/';
+			j++;
+			while(i<100){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			namebuff[j] = '\0';
+		}
+		else{
+			for(i = 0; i< 100; i++){
+				namebuff[i] = buff[i];
+			}
+		}
+
 			for(i = 0, j = 124; i<12; i++, j++){
 				sizestring[i] = buff[j];
 			}
 			amount = octDec(atoi(sizestring));
 
-			if(buff[0]!= 0&&strcmp(buff,name)==0){
-				char name[100];
+			if(namebuff[0]!= 0&&strcmp(namebuff,name)==0){
 				i = 0;
-				while(buff[i]!= 0){
-					name[i] = buff[i];
-					i++;
-				}
 				name[i] = 0;
 				char mod[8];
 				i = 100;
@@ -439,7 +512,7 @@ void table(int file_read, char *name, int v){
 			memset(buf, 0 ,17);
 			strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &ts);
 				printf("%s ",buf);
-				printf("%s\n", buff);
+				printf("%s\n", namebuff);
 			}
 			memset(buff, 0 ,512);
 			 blockcount = amount/512;
@@ -458,10 +531,9 @@ void table(int file_read, char *name, int v){
 	else{
 		if(v == 0){
 		while(read(file_read, buff, 512)>0){
-		/*printf("First header: %s\n", buff);*/
-		memset(namebuff, 0 ,255);
-		for(i = 0; i< 100; i++){
-			namebuff[i] = buff[i];
+		memset(namebuff, 0 ,256);
+	/*	for(i = 0,j = 100; i< 100; i++, j++){
+			namebuff[j] = buff[i];
 		}
 		if(namebuff[99]!= '\0'){
 			i = 345;
@@ -474,6 +546,30 @@ void table(int file_read, char *name, int v){
 			
 			namebuff[j] = '\0';
 			
+		}
+		*/	
+		if(buff[345] != '\0'){
+			i = 345;
+			j = 0;
+			while(buff[i] != '\0' && i<500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			i = 0;
+			namebuff[j] = '/';
+			j++;
+			while(i<100){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			namebuff[j] = '\0';
+		}
+		else{
+			for(i = 0; i< 100; i++){
+				namebuff[i] = buff[i];
+			}
 		}
 		for(i = 0, j = 124; i<12; i++, j++){
 			sizestring[i] = buff[j];
@@ -495,19 +591,30 @@ void table(int file_read, char *name, int v){
 			
 			while(read(file_read, buff, 512)>0){
 			memset(namebuff, 0 ,255);
+		if(buff[345] != '\0'){
+			i = 345;
+			j = 0;
+			while(buff[i] != '\0' && i<500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			i = 0;
+			namebuff[j] = '/';
+			j++;
+			while(i<100){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			namebuff[j] = '\0';
+		}
+		else{
 			for(i = 0; i< 100; i++){
 				namebuff[i] = buff[i];
 			}
-			if(buff[99]!= '\0'){
-				i = 345;
-				j = 100;
-				while(buff[i] != '\0' && i< 500){
-					namebuff[j] = buff[i];
-					i++;
-					j++;
-				}
-				namebuff[j] = '\0';
-			}
+		}
+
 			for(i = 0, j = 124; i<12; i++, j++){
 				sizestring[i] = buff[j];
 			}
@@ -627,8 +734,8 @@ void extract(int file_read, char * name){
 			namebuff[j] = '\0';
 			
 		}
-		printf("Name:%s\n",namebuff);
-		printf("expect:%s\n",name);
+	/*	printf("Name:%s\n",namebuff);
+		printf("expect:%s\n",name);*/
 		for(i = 0, j = 124; i<12; i++, j++){
 			sizestring[i] = buff[j];
 		}
