@@ -1,0 +1,507 @@
+
+==========================================
+1) General test: no arguments  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    No arguments
+    : Success
+  --------------------------
+
+==========================================
+2) General test: no C, T, or X  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    STOP: Success
+  --------------------------
+
+==========================================
+3) General test: f switch with no filename  ((probably) ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+    need tarfile: Success
+  --------------------------
+
+==========================================
+4) General test: Trying to list a bad tarfile  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    ^?ELF^B^A^A
+    /lib64/ld-linux-x86-64.so.2
+    M-^R^B
+    M-C^C
+    ^W^B
+    M-pUB
+    8}M-6M-^I>
+    ^A
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+5) Creation test: One named file  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 181 2011-02-08 14:49 JustAFile
+  --------------------------
+
+==========================================
+6) Creation test: One named binary file  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 128 2011-02-08 14:49 JustABinaryFile
+  --------------------------
+
+==========================================
+7) Creation test: Two Named Files  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 128 2011-02-08 14:49 JustABinaryFile
+    -r--r--r-- pn-cs357/domain users 181 2011-02-08 14:49 JustAFile
+  --------------------------
+
+==========================================
+8) Creation test: Three Named Files, one nonexistent  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    -r--r--r-- pn-cs357/domain users 128 2011-02-08 14:49 JustABinaryFile
+    -r--r--r-- pn-cs357/domain users 181 2011-02-08 14:49 JustAFile
+  --------------------------
+
+==========================================
+9) Creation test: Directory with children  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeOneLevel/
+    -r--r--r-- pn-cs357/domain users  16195 2011-02-08 14:49 TreeOneLevel/Moe
+    -r--r--r-- pn-cs357/domain users 250572 2011-02-08 14:49 TreeOneLevel/Larry
+    -r--r--r-- pn-cs357/domain users 354687 2011-02-08 14:49 TreeOneLevel/Curly
+  --------------------------
+
+==========================================
+10) Creation test: Directory with grandchildren  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+    ftime: 1297205397
+    time: 11524344225
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeTwoLevels/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeTwoLevels/Paper/
+    dr-xr-xr-x pn-cs357/domain users      0 2011-02-08 14:49 TreeTwoLevels/Rock/
+    dr-xr-xr-x pn-cs357/domain users      0 2011-02-08 14:49 TreeTwoLevels/Scissors/
+    -r--r--r-- pn-cs357/domain users  16195 2011-02-08 14:49 TreeTwoLevels/Paper/Moe
+    -r--r--r-- pn-cs357/domain users  16195 2011-02-08 14:49 TreeTwoLevels/Rock/Moe
+    -r--r--r-- pn-cs357/domain users  16195 2011-02-08 14:49 TreeTwoLevels/Scissors/Moe
+    -r--r--r-- pn-cs357/domain users 250572 2011-02-08 14:49 TreeTwoLevels/Paper/Larry
+    -r--r--r-- pn-cs357/domain users 250572 2011-02-08 14:49 TreeTwoLevels/Rock/Larry
+    -r--r--r-- pn-cs357/domain users 250572 2011-02-08 14:49 TreeTwoLevels/Scissors/Larry
+    -r--r--r-- pn-cs357/domain users 354687 2011-02-08 14:49 TreeTwoLevels/Paper/Curly
+    -r--r--r-- pn-cs357/domain users 354687 2011-02-08 14:49 TreeTwoLevels/Rock/Curly
+    -r--r--r-- pn-cs357/domain users 354687 2011-02-08 14:49 TreeTwoLevels/Scissors/Curly
+  --------------------------
+
+==========================================
+11) Creation test: Deep Tree, all in name  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+    ftime: 1297205395
+    time: 11524344223
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/One/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/One/Five/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/One/Four/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/One/Six/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Three/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Three/Five/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Three/Four/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Three/Six/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Two/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Two/Five/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Two/Four/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreeNoPrefix/Two/Six/
+    -r--r--r-- pn-cs357/domain users  1056 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    -r--r--r-- pn-cs357/domain users  1293 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    -r--r--r-- pn-cs357/domain users 13756 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    -r--r--r-- pn-cs357/domain users   140 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    -r--r--r-- pn-cs357/domain users 164 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd6
+    -r--r--r-- pn-cs357/domain users  1697 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    -r--r--r-- pn-cs357/domain users 17106 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    -r--r--r-- pn-cs357/domain users 172 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd2
+    -r--r--r-- pn-cs357/domain users 179 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd5
+    -r--r--r-- pn-cs357/domain users  188 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    -r--r--r-- pn-cs357/domain users  2045 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    -r--r--r-- pn-cs357/domain users  2269 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    -r--r--r-- pn-cs357/domain users 239 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd8
+    -r--r--r-- pn-cs357/domain users 254 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd0
+    -r--r--r-- pn-cs357/domain users 258 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd3
+    -r--r--r-- pn-cs357/domain users 2643 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    -r--r--r-- pn-cs357/domain users 2660 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    -r--r--r-- pn-cs357/domain users 321 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd9
+    -r--r--r-- pn-cs357/domain users   336 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    -r--r--r-- pn-cs357/domain users 347 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd7
+    -r--r--r-- pn-cs357/domain users  3838 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    -r--r--r-- pn-cs357/domain users 431 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd4
+    -r--r--r-- pn-cs357/domain users   506 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    -r--r--r-- pn-cs357/domain users 724 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/UnTermtd1
+    -r--r--r-- pn-cs357/domain users   758 2011-02-08 14:49 TreeNoPrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+  --------------------------
+
+==========================================
+12) Creation test: Deep Tree, moves into prefix  (FAILURE)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    FIle to be written: 3
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+    ftime: 1297205396
+    time: 11524344224
+  --------------------------
+  --------------------------
+  Submitted's archive listing(sorted):
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    dr-xr-xr-x pn-cs357/domain users 0 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/One/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/One/Five/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/One/Four/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/One/Six/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Three/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Three/Five/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Three/Four/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Three/Six/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Two/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Two/Five/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Two/Four/
+    dr-xr-xr-x pn-cs357/domain users     0 2011-02-08 14:49 TreePrefix/Two/Six/
+    -r--r--r-- pn-cs357/domain users  1056 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-9
+    -r--r--r-- pn-cs357/domain users  1293 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-6
+    -r--r--r-- pn-cs357/domain users 13756 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-5
+    -r--r--r-- pn-cs357/domain users   140 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-4
+    -r--r--r-- pn-cs357/domain users 164 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users  1697 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-3
+    -r--r--r-- pn-cs357/domain users 17106 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-12
+    -r--r--r-- pn-cs357/domain users 172 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 179 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users  188 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-11
+    -r--r--r-- pn-cs357/domain users  2045 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-13
+    -r--r--r-- pn-cs357/domain users  2269 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-7
+    -r--r--r-- pn-cs357/domain users 239 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 254 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 258 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users 2643 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-10
+    -r--r--r-- pn-cs357/domain users 2660 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-1
+    -r--r--r-- pn-cs357/domain users 321 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users   336 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-15
+    -r--r--r-- pn-cs357/domain users 347 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users  3838 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-8
+    -r--r--r-- pn-cs357/domain users 431 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users   506 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-2
+    -r--r--r-- pn-cs357/domain users 724 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/ItsDarkDownHere/WheresMyFlashlight/ThePlace/OneMoreLeve
+    -r--r--r-- pn-cs357/domain users   758 2011-02-08 14:49 TreePrefix/Deep/Deeper/EvenDeeper/WayFarDown/FarDownFile-14
+  --------------------------
+
+==========================================
+13) Listing test: single text file, non-verbose  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustAFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
+
+==========================================
+14) Listing test: single binary file, non-verbose  (ok)
+==========================================
+  --------------------------
+  Submitted's stdout:
+    JustABinaryFile
+  --------------------------
+  --------------------------
+  Submitted's stderr:
+  --------------------------
