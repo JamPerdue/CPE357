@@ -297,6 +297,7 @@ void dirtrav(char *name, int file_out){
 
 	closedir(dir);
 }
+
 int octDec(int n){
 	int num = n;
 	int dec = 0;
@@ -311,24 +312,9 @@ int octDec(int n){
 	}
 	return dec;
 }
-uint8_t octDeclong(uint8_t n){
-	uint8_t num = n;
-	uint8_t	dec = 0;
-	uint8_t  base = 1;
- 	uint8_t temp = num;
- 	uint8_t lastdigit = 0;
-	while(temp){
-		lastdigit = temp %10;
-		temp = temp/10;
-		dec += lastdigit * base;
-		base = base * 8;
-	}
-	return dec;
-}
 void table(int file_read, char *name, int v){
 	int i = 0;
 	uint8_t buff[512];
-	int bytesread = 0;
 	char sizestring[12];
 	char *ptr;
 	int amount = 0;
@@ -338,7 +324,9 @@ void table(int file_read, char *name, int v){
    	char buf[17];
 	int blockcount = 0;
 	int rem = 0;
-	/*uint8_t * fi = (uint8_t *)malloc(sizeof(uint8_t)*512);*/
+	int dircheck = 0;
+	char namebuff[256];
+	lseek(file_read, 0, SEEK_SET);
 	if(name != NULL){
 		if(v == 0){	
 		while(read(file_read, buff, 512)>0){
@@ -346,7 +334,22 @@ void table(int file_read, char *name, int v){
 			sizestring[i] = buff[j];
 		}
 		amount = octDec(atoi(sizestring));
-		if(buff[0]!= '\0'&&strcmp(buff,name)==0){
+		/*while(buff[i]!= 0 && i<100){
+			if(buff[i] == name[0]){
+				j = 1;
+				while(j<strlen(name)&&buff[i]==name[j]){
+					i++;
+					j++;
+				}
+				if(buff[i] =='/'){
+					dircheck = 1;
+					break;
+				}
+			}
+			i++;
+		}*/
+				
+		if(buff[0]!= '\0'&&strcmp(buff,name)==0&& dircheck == 0){
 			printf("%s\n", buff);
 		}
 		 blockcount = amount/512;
@@ -456,12 +459,28 @@ void table(int file_read, char *name, int v){
 		if(v == 0){
 		while(read(file_read, buff, 512)>0){
 		/*printf("First header: %s\n", buff);*/
+		memset(namebuff, 0 ,255);
+		for(i = 0; i< 100; i++){
+			namebuff[i] = buff[i];
+		}
+		if(namebuff[99]!= '\0'){
+			i = 345;
+			j = 100;
+			while(buff[i] != '\0' && i< 500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			
+			namebuff[j] = '\0';
+			
+		}
 		for(i = 0, j = 124; i<12; i++, j++){
 			sizestring[i] = buff[j];
 		}
 		amount = octDec(atoi(sizestring));
 		if(buff[0]!= '\0'){
-			printf("%s\n", buff);
+			printf("%s\n", namebuff);
 		}
 		 blockcount = amount/512;
 		 rem = amount%512;
@@ -475,6 +494,20 @@ void table(int file_read, char *name, int v){
 		else{
 			
 			while(read(file_read, buff, 512)>0){
+			memset(namebuff, 0 ,255);
+			for(i = 0; i< 100; i++){
+				namebuff[i] = buff[i];
+			}
+			if(buff[99]!= '\0'){
+				i = 345;
+				j = 100;
+				while(buff[i] != '\0' && i< 500){
+					namebuff[j] = buff[i];
+					i++;
+					j++;
+				}
+				namebuff[j] = '\0';
+			}
 			for(i = 0, j = 124; i<12; i++, j++){
 				sizestring[i] = buff[j];
 			}
@@ -550,7 +583,7 @@ void table(int file_read, char *name, int v){
 			memset(buf, 0 ,17);
 			strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &ts);
 				printf("%s ",buf);
-				printf("%s\n", buff);
+				printf("%s\n", namebuff);
 			}
 			memset(buff, 0 ,512);
 			 blockcount = amount/512;
@@ -565,7 +598,124 @@ void table(int file_read, char *name, int v){
 		}
 	}
 }
+void extract(int file_read, char * name){
+	uint8_t buff[512];
+	int i = 0;
+	char namebuff[256];
+	int j = 0;
+	char sizestring[12];
+	int amount = 0;
+	int blockcount = 0;
+	int rem = 0;
+	memset(buff, 0 ,512);
+	if(name != NULL){
+		while(read(file_read, buff, 512)>0){
+		/*printf("First header: %s\n", buff);*/
+		memset(namebuff, 0 ,255);
+		for(i = 0; i< 100; i++){
+			namebuff[i] = buff[i];
+		}
+		if(namebuff[99]!= '\0'){
+			i = 345;
+			j = 100;
+			while(buff[i] != '\0' && i< 500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			
+			namebuff[j] = '\0';
+			
+		}
+		printf("Name:%s\n",namebuff);
+		printf("expect:%s\n",name);
+		for(i = 0, j = 124; i<12; i++, j++){
+			sizestring[i] = buff[j];
+		}
+		amount = octDec(atoi(sizestring));
+		if(namebuff[0]!= 0&&strcmp(name,namebuff)== 0){
+			printf("named\n");
+			newfile(buff, namebuff, file_read, amount);
+		}
+		else{
+			lseek(file_read, amount, SEEK_CUR);
+		}
+		 blockcount = amount/512;
+		 rem = amount%512;
+		if(rem!=0){
+			blockcount++;
+		}
+		memset(buff, 0 ,512);
+		lseek(file_read, blockcount*512-amount, SEEK_CUR);
+		}
 
+
+	}
+	else{
+	while(read(file_read, buff, 512)>0){
+		/*printf("First header: %s\n", buff);*/
+		memset(namebuff, 0 ,255);
+		for(i = 0; i< 100; i++){
+			namebuff[i] = buff[i];
+		}
+		if(namebuff[99]!= '\0'){
+			i = 345;
+			j = 100;
+			while(buff[i] != '\0' && i< 500){
+				namebuff[j] = buff[i];
+				i++;
+				j++;
+			}
+			
+			namebuff[j] = '\0';
+			
+		}
+		for(i = 0, j = 124; i<12; i++, j++){
+			sizestring[i] = buff[j];
+		}
+		amount = octDec(atoi(sizestring));
+		if(namebuff[0]!= 0){
+			newfile(buff, namebuff, file_read, amount);
+		}
+		 blockcount = amount/512;
+		 rem = amount%512;
+		if(rem!=0){
+			blockcount++;
+		}
+		memset(buff, 0 ,512);
+		lseek(file_read, blockcount*512-amount, SEEK_CUR);
+		}
+	}
+}
+
+void newfile(uint8_t buff[512],char namebuff[256], int file_read, int amount){
+	int i = 0;
+	int newfile = 0;
+	uint8_t bu[1];
+	int curr = 0;
+	char mod[8];
+	int j = 0;
+	char *ptr = NULL;
+	mode_t mode = 0;
+	i = 100;
+	j = 0;
+	while(buff[i] != 0){
+		mod[j] = buff[i];
+		i++;
+		j++;
+	}
+	mod[j] = 0;		
+	mode = (mode_t)strtol(mod, &ptr, 8);
+	newfile = creat(namebuff, mode);
+	while(curr< amount){
+		read(file_read, bu, 1);
+		write(newfile, bu, 1);
+		curr++;
+	}
+/*	if(curr%512 != 0){
+		lseek(file_read, curr%512, SEEK_CUR);
+	}*/
+}
 void proper_parse(int argc, char **argv){
 	int v = 0;
 	int file_out = 0;
@@ -619,9 +769,32 @@ void proper_parse(int argc, char **argv){
 		}
 		else{
 			perror("bad tar");
+			return;
 		}
 	}
-	
+	else if(argv[1][0] == 'x'){
+		if(argc <= 2){
+			perror("need tarfile");
+			return;
+		}
+		if((file_read = open(argv[2], O_RDONLY)) >0){
+			if(argc > 3){
+				for(i = 3; i< argc; i++){
+					lseek(file_read, 0, SEEK_SET);
+					extract(file_read, argv[i]);
+				}
+			}
+			else{
+				extract(file_read, NULL);
+			}
+			close(file_read);	
+		}
+		else{
+			perror("bad tar");
+			return;
+		}
+	}
+
 }	
 int main(int argc, char *argv[]){
 	if(argc <= 1){

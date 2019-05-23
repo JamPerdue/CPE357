@@ -22,7 +22,7 @@ void table(int, char *, int);
 
 void dirtrav(char *, int);
 
-void extract(char *, char *);
+void extract(int, char *);
 
-
+void newfile(uint8_t[512],char[256], int, int);
 #endif
