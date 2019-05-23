@@ -10,7 +10,7 @@
 #include <string.h>
 #include <pwd.h>
 #include <grp.h>
-
+#include <time.h>
 void build_dir(char * dirname){
 	struct dirent *de;
 
@@ -297,23 +297,140 @@ void dirtrav(char *name, int file_out){
 
 	closedir(dir);
 }
+int octDec(int n){
+	int num = n;
+	int dec = 0;
+	int base = 1;
+	int temp = num;
+	int lastdigit = 0;
+	while(temp){
+		lastdigit = temp %10;
+		temp = temp/10;
+		dec += lastdigit * base;
+		base = base * 8;
+	}
+	return dec;
+}
+
 void table(int file_read, char *name, int v){
 	int i = 0;
 	uint8_t buff[512];
 	int bytesread = 0;
-	char * sizestring;
+	char sizestring[12];
 	char *ptr;
 	int amount = 0;
+	int j = 0;
+	struct stat filestat;
+	struct tm  ts;
+   	char buf[17];
+	int blockcount = 0;
+	int rem = 0;
+	/*uint8_t * fi = (uint8_t *)malloc(sizeof(uint8_t)*512);*/
 	if(name != NULL){
 	
 	}
 	else{
-		read(file_read, buff, 512);
+		if(v == 0){
+		while(read(file_read, buff, 512)>0){
 		/*printf("First header: %s\n", buff);*/
-		/*strcpy(sizestring, buff+124);*/
+		for(i = 0, j = 124; i<12; i++, j++){
+			sizestring[i] = buff[j];
+		}
 		/*printf("size: %s\n", sizestring);*/
-		/*amount = (int) strtol(sizestring, &ptr, 10);*/
-		printf("%s\n", buff);
+		/*amount = (int) strtol(sizestring, &ptr, 10); */
+		amount = octDec(atoi(sizestring));
+		if(buff[0]!= '\0'){
+			printf("%s\n", buff);
+		}
+		 blockcount = amount/512;
+		 rem = amount%512;
+		if(rem!=0){
+			blockcount++;
+		}
+		/*printf("%dblock\n",blockcount);*/
+		memset(buff, 0 ,512);
+		/*fi = realloc(fi, amount);
+		printf("Read: %d\n",read(file_read, fi, amount));*/
+		/*printf("size: %d\n",amount);*/
+		lseek(file_read, blockcount*512, SEEK_CUR);
+/*
+		printf("1\n");*/
+		}
+		}
+		else{
+			
+			while(read(file_read, buff, 512)>0){
+			/*printf("First header: %s\n", buff);*/
+			for(i = 0, j = 124; i<12; i++, j++){
+				sizestring[i] = buff[j];
+			}
+			/*printf("size: %s\n", sizestring);*/
+			amount = octDec(atoi(sizestring));
+
+			if(buff[0]!= 0){
+				lstat((char *)buff, &filestat);
+				switch (filestat.st_mode & S_IFMT) {
+ 					case S_IFBLK:  printf("b");break;
+ 					case S_IFCHR:  printf("c");break;
+ 					case S_IFDIR:  printf("d");break;
+ 					case S_IFIFO:  printf("p");break;
+ 					case S_IFLNK:  printf("l");break;
+ 					case S_IFREG:  printf("-");break;
+ 				}
+ 			printf( (filestat.st_mode & S_IRUSR) ? "r" : "-");
+ 			printf( (filestat.st_mode & S_IWUSR) ? "w" : "-");
+ 			printf( (filestat.st_mode & S_IXUSR) ? "x" : "-");
+ 			printf( (filestat.st_mode & S_IRGRP) ? "r" : "-");
+ 			printf( (filestat.st_mode & S_IWGRP) ? "w" : "-");
+ 			printf( (filestat.st_mode & S_IXGRP) ? "x" : "-");
+ 			printf( (filestat.st_mode & S_IROTH) ? "r" : "-");
+ 			printf( (filestat.st_mode & S_IWOTH) ? "w" : "-");
+ 			printf( (filestat.st_mode & S_IXOTH) ? "x" : "-");
+				printf(" ");
+				char user[8];
+				char group[8];
+				for(i = 0, j = 265; i<8; i++, j++){
+					user[i] = buff[j];
+				}
+				user[7] = '\0';
+				for(i = 0, j = 297; i<8; i++, j++){
+					group[i] = buff[j];
+				}
+				group[7] = '\0';
+				printf("%s/%s", user,group);
+				int ispa = 0;
+				if(amount ==0){
+				printf("       0");
+				}
+				else{
+				for(i = 0; i<strlen(sizestring);i++){
+					if(sizestring[i] == '0' && ispa ==0){
+						printf(" ");
+					}
+					else{
+						ispa = 1;
+						printf("%c",sizestring[i]);
+					}
+				}
+				}
+				printf(" ");
+			ts = *localtime(&filestat.st_mtime);
+			memset(buf, 0 ,17);
+			strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &ts);
+				printf("%s ",buf);
+				printf("%s\n", buff);
+			}
+			memset(buff, 0 ,512);
+			 blockcount = amount/512;
+			 rem = amount%512;
+			if(rem!=0){
+				blockcount++;
+			}
+
+			lseek(file_read, blockcount*512, SEEK_CUR);
+		}
+
+		}
 	}
 }
 
