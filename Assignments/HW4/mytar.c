@@ -62,13 +62,13 @@ uint8_t * pack_header(char *name){
 		namecounter++;
 	}*/
 	if(strlen(name)>99){
-		i = strlen(name)-101;
+		i = strlen(name)-100;
 		j = 0;
 		k = 345;
 		while(i> 0){
 			block[k] = name[j];
 			j++;
-			i++;
+			i--;
 			k++;
 		}
 		block[k]=0;
@@ -415,7 +415,6 @@ void table(int file_read, char *name, int v){
 		}
 		}
 		else{
-			
 			while(read(file_read, buff, 512)>0){
 			memset(namebuff, 0 ,256);
 		if(buff[345] != '\0'){
@@ -523,7 +522,6 @@ void table(int file_read, char *name, int v){
 
 			lseek(file_read, blockcount*512, SEEK_CUR);
 		}
-
 		}
 
 
@@ -531,6 +529,7 @@ void table(int file_read, char *name, int v){
 	else{
 		if(v == 0){
 		while(read(file_read, buff, 512)>0){
+			if(buff[257] == 'u'){
 		memset(namebuff, 0 ,256);
 	/*	for(i = 0,j = 100; i< 100; i++, j++){
 			namebuff[j] = buff[i];
@@ -587,9 +586,11 @@ void table(int file_read, char *name, int v){
 		lseek(file_read, blockcount*512, SEEK_CUR);
 		}
 		}
+		}	
 		else{
 			
 			while(read(file_read, buff, 512)>0){
+				if(buff[257] == 'u'){
 			memset(namebuff, 0 ,255);
 		if(buff[345] != '\0'){
 			i = 345;
@@ -701,7 +702,7 @@ void table(int file_read, char *name, int v){
 
 			lseek(file_read, blockcount*512, SEEK_CUR);
 		}
-
+		}
 		}
 	}
 }
@@ -864,7 +865,7 @@ void proper_parse(int argc, char **argv){
 		}
 		if((file_read = open(argv[2], O_RDONLY)) >0){
 			if(argc > 3){
-				for(i = 3; i< argc; i++){
+				for(i = argc-1; i> 2; i--){
 					lseek(file_read, 0, SEEK_SET);
 					table(file_read, argv[i], v);
 				}
@@ -886,7 +887,7 @@ void proper_parse(int argc, char **argv){
 		}
 		if((file_read = open(argv[2], O_RDONLY)) >0){
 			if(argc > 3){
-				for(i = 3; i< argc; i++){
+				for(i = argc;i > 2; i--){
 					lseek(file_read, 0, SEEK_SET);
 					extract(file_read, argv[i]);
 				}
