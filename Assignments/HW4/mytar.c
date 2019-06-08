@@ -354,7 +354,27 @@ void table(int file_read, char *name, int v){
 	int rem = 0;
 	int dircheck = 0;
 	char namebuff[256];
+	int checksum = 0;
+	char checkstr[8];
 	lseek(file_read, 0, SEEK_SET);
+	read(file_read, buff, 512);
+	for(i = 0; i< 500; i++){
+		if(i>147 && i<156){
+			checksum+= 32;
+		}
+		else{
+			checksum += buff[i];
+		}
+	}
+	for(i = 0, j = 148; i <8; i++, j++){
+		checkstr[i] = buff[j];
+	}
+	if(strtol(checkstr, &ptr, 8) != checksum){
+		fprintf(stderr, "bad tarfile");
+		return;
+	}
+	lseek(file_read, 0, SEEK_SET);
+
 	if(name != NULL){
 		if(v == 0){	
 		while(read(file_read, buff, 512)>0){
@@ -719,7 +739,7 @@ void extract(int file_read, char * name){
 	if(name != NULL){
 		while(read(file_read, buff, 512)>0){
 		/*printf("First header: %s\n", buff);*/
-		memset(namebuff, 0 ,255);
+		memset(namebuff, 0 ,256);
 		for(i = 0; i< 100; i++){
 			namebuff[i] = buff[i];
 		}
@@ -742,7 +762,7 @@ void extract(int file_read, char * name){
 		}
 		amount = octDec(atoi(sizestring));
 		if(namebuff[0]!= 0&&strcmp(name,namebuff)== 0){
-			printf("named\n");
+			printf("named,%s\n",namebuff);
 			newfile(buff, namebuff, file_read, amount);
 		}
 		else{
@@ -887,7 +907,7 @@ void proper_parse(int argc, char **argv){
 		}
 		if((file_read = open(argv[2], O_RDONLY)) >0){
 			if(argc > 3){
-				for(i = argc;i > 2; i--){
+				for(i = argc -1;i > 2; i--){
 					lseek(file_read, 0, SEEK_SET);
 					extract(file_read, argv[i]);
 				}

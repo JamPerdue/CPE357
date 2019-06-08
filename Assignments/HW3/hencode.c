@@ -279,6 +279,7 @@ int main(int argc, char * argv[]){
 	list.head = NULL;
 	list.size = 0;
 	tree.head = NULL;
+	buf[0]=0;
 	if(argc > 1){
 		file_in = open(argv[1],O_RDONLY);
 		
@@ -293,12 +294,12 @@ int main(int argc, char * argv[]){
 		table[buf[0]]++;	
 		total_chars++;
 	}
-	/*
+	
 	for(i = 0; i < 256; i++){
 		if(table[i]>0){
 			printf("Char: %d, Freq: %d\n", i, table[i]);
 		}
-	}*/
+	}
 	/* build freq tabnle*/
 	for(i = 0; i< 256; i++){
 		if(table[i]>0){
@@ -330,11 +331,11 @@ int main(int argc, char * argv[]){
 		file_out = STDOUT_FILENO;
 	}
 
-	/*for(i = 0; i < 256; i++){
+	for(i = 0; i < 256; i++){
 		if(table[i]>0){
 			printf("Code %d: %s\n",i, code_table[i]);
 		}
-	}*/	
+	}	
 	write_header(table, file_out);
 	
 	lseek(file_in,0, SEEK_SET);

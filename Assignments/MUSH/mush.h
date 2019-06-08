@@ -7,7 +7,7 @@ typedef struct Stage{
 	char in[512];
 	int n;
 	int tot;
-	char argv[10][512];
+	char *argv[11];
 	struct Stage * next;
 } Stage;
 
